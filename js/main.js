@@ -426,8 +426,7 @@ $("#postalCode").addEventListener("change", () => {
 // MERCADO PAGO
 // Para cobrar realmente necesitaremos un backend seguro.
 // Este formulario NO envía datos ni procesa pagos.
-
-$("#checkoutForm").addEventListener("submit", event => {
+$("#checkoutForm").addEventListener("submit", async event => {
   event.preventDefault();
 
   if (!cart.length) {
@@ -439,14 +438,34 @@ $("#checkoutForm").addEventListener("submit", event => {
 
   if (!form.reportValidity()) return;
 
-  alert(
-    "¡Estamos preparando FLORÉ! 💜\n\n" +
-    "Subtotal: " + formatPrice(cartTotal()) + "\n\n" +
-    "Esta es una demostración.\n" +
-    "Todavía no se procesan pagos ni pedidos reales.\n\n" +
-    "Próximamente conectaremos Mercado Pago y " +
-    "Correo Argentino para completar la compra."
-  );
+
+const items = cart.map(item => ({
+  id: item.id,
+  quantity: item.quantity
+}));
+
+
+try {
+  const response = await fetch("/.netlify/functions/crear-pago", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ items })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok || !data.url) {
+    throw new Error("No se pudo iniciar el pago de prueba");
+  }
+
+  window.location.href = data.url;
+} catch (error) {
+  console.error(error);
+  alert("No pudimos abrir Mercado Pago. Intentá nuevamente.");
+}
+
 });
 
 // INICIALIZACIÓN
