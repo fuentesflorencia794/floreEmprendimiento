@@ -50,7 +50,11 @@ console.log("¿Llegó el request ID?", Boolean(headers["x-request-id"]));
 
   const mensaje =
     `id:${paymentId};request-id:${requestId};ts:${partes.ts};`;
-
+console.log("¿Coinciden los datos de firma?", {
+  paymentId,
+  tieneTs: Boolean(partes.ts),
+  tieneV1: Boolean(partes.v1)
+});
   const firmaCalculada = crypto
     .createHmac("sha256", secreto)
     .update(mensaje)
