@@ -93,6 +93,8 @@ let cart = [];
 
 try {
   const saved = JSON.parse(localStorage.getItem("floreCart"));
+  cart = [];
+updateCart();
   if (Array.isArray(saved)) {
     cart = saved
       .filter(item =>
@@ -473,3 +475,15 @@ try {
 updateDeliveryFields();
 renderProducts();
 updateCart();
+
+const parametrosPago = new URLSearchParams(window.location.search);
+
+if (
+  window.location.pathname === "/pago-exitoso" &&
+  parametrosPago.get("status") === "approved"
+) {
+  alert("🎉 ¡Tu compra de prueba en FLORÉ fue aprobada!");
+  localStorage.removeItem("floreCart");
+  cart = [];
+  updateCart();
+}
