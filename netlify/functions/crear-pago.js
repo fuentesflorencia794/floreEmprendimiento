@@ -60,9 +60,14 @@ exports.handler = async (event) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          items: itemsSeguros,
-          external_reference: `FLORE-TEST-${Date.now()}`
-        })
+  items: itemsSeguros,
+  external_reference: `FLORE-TEST-${Date.now()}`,
+  back_urls: {
+    success: "https://flore-tienda.netlify.app/?pago=exitoso",
+    failure: "https://flore-tienda.netlify.app/?pago=fallido",
+    pending: "https://flore-tienda.netlify.app/?pago=pendiente"
+  }
+})
       }
     );
 
@@ -74,7 +79,7 @@ exports.handler = async (event) => {
     const data = await response.json();
         if (!data.sandbox_init_point) {
   throw new Error("Mercado Pago no devolvió un enlace de prueba");
-}
+}   
 
     return {
       statusCode: 200,
