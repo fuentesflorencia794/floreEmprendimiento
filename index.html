@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLORÉ | Lo viste. Lo querés.</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <div class="announcement">
+    ✨ Descubrí cosas que no sabías que necesitabas
+  </div>
+
+  <header class="header">
+    <a href="#" class="logo">FLOR<span>É</span><small>shop</small></a>
+
+    <nav class="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#nosotros">Nosotros</a>
+    </nav>
+
+    <button class="cart-button" id="openCart">
+      🛍️ Mi carrito <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">BIENVENIDOS A FLORÉ ✨</span>
+        <h1>Cosas que ves.<br><em>Cosas que querés.</em></h1>
+        <p>
+          Productos originales, prácticos y llenos de onda.
+          De esos que descubrís y pensás: ¡lo necesito!
+        </p>
+        <a href="#productos" class="primary-button">
+          Descubrir productos →
+        </a>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-emoji">🛍️</div>
+        <span class="float-one">✨</span>
+        <span class="float-two">💜</span>
+        <span class="float-three">⭐</span>
+      </div>
+    </section>
+
+    <div class="benefits">
+      <span>✨ Productos originales</span>
+      <span>📦 Envíos a Argentina</span>
+      <span>💜 Compras con onda</span>
+    </div>
+
+    <section class="section" id="categorias">
+      <div class="section-heading">
+        <span class="eyebrow">ENCONTRÁ TU PRÓXIMO FAVORITO</span>
+        <h2>¿Qué se te antoja descubrir?</h2>
+      </div>
+      <div class="category-grid">
+        <button class="category-card kitchen" data-category="Cocina">
+          <span>🍳</span><h3>Cocina</h3><p>Ideas que simplifican</p>
+        </button>
+        <button class="category-card car" data-category="Auto">
+          <span>🚗</span><h3>Auto</h3><p>Accesorios que suman</p>
+        </button>
+        <button class="category-card travel" data-category="Viajes">
+          <span>✈️</span><h3>Viajes</h3><p>Todo listo para salir</p>
+        </button>
+        <button class="category-card wow" data-category="Lo quiero">
+          <span>😍</span><h3>Lo vi y lo quiero</h3>
+          <p>Caprichitos necesarios</p>
+        </button>
+      </div>
+    </section>
+
+    <section class="section products-section" id="productos">
+      <div class="section-heading">
+        <span class="eyebrow">NUESTROS DESCUBRIMIENTOS</span>
+        <h2>Productos que enamoran 💜</h2>
+        <p>Elegí tus favoritos y agregalos al carrito.</p>
+      </div>
+
+      <div class="product-tools">
+        <input id="searchInput" type="search"
+          placeholder="🔎 Buscar productos...">
+        <select id="categoryFilter">
+          <option value="Todos">Todos los productos</option>
+          <option value="Cocina">Cocina</option>
+          <option value="Auto">Auto</option>
+          <option value="Viajes">Viajes</option>
+          <option value="Lo quiero">Lo vi y lo quiero</option>
+        </select>
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section class="newsletter" id="nosotros">
+      <span class="eyebrow">UN POQUITO SOBRE NOSOTROS</span>
+      <h2>Bienvenidos al universo FLORÉ ✨</h2>
+      <p>
+        Nos encanta descubrir productos que sorprenden,
+        resuelven pequeños problemas y hacen más lindo
+        el día a día.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <strong>FLORÉ ✨</strong>
+    <p>Lo viste. Lo querés.</p>
+    <small>© 2026 FLORÉ Shop · Argentina</small>
+  </footer>
+
+  <!-- FONDO OSCURO DEL CARRITO -->
+  <div id="overlay" class="overlay hidden"></div>
+
+  <!-- CARRITO LATERAL -->
+  <aside id="cartPanel" class="cart-panel">
+    <div class="panel-header">
+      <h2>Tu carrito 🛍️</h2>
+      <button id="closeCart" class="close-button">✕</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="total-line">
+        <strong>Subtotal</strong>
+        <strong id="cartTotal">$0</strong>
+      </div>
+      <small>El envío se calcula por separado.</small>
+      <button id="checkoutButton" class="primary-button full">
+        Finalizar compra →
+      </button>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT -->
+  <section id="checkoutModal" class="checkout-modal hidden">
+    <div class="checkout-box">
+      <button id="closeCheckout" class="close-button top-right">✕</button>
+      <h2>Finalizar compra 💜</h2>
+      <p>Completá tus datos para continuar.</p>
+
+      <form id="checkoutForm">
+        <label>Nombre y apellido</label>
+        <input id="customerName" required
+          placeholder="Tu nombre completo">
+
+        <label>Correo electrónico</label>
+        <input id="customerEmail" type="email" required
+          placeholder="tuemail@ejemplo.com">
+
+        <label>Teléfono</label>
+        <input id="customerPhone" type="tel" required
+          placeholder="Tu teléfono">
+
+        <h3>📦 Forma de entrega</h3>
+        <label class="radio-option">
+          <input type="radio" name="delivery"
+            value="domicilio" checked>
+          Correo Argentino a domicilio
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="delivery"
+            value="sucursal">
+          Retiro en sucursal de Correo Argentino
+        </label>
+
+        <label>Código postal</label>
+        <input id="postalCode" required
+          placeholder="Ejemplo: 1878">
+
+        <div id="addressFields">
+          <label>Dirección de entrega</label>
+          <input id="streetAddress"
+            placeholder="Calle, número, piso y departamento">
+          <label>Localidad y provincia</label>
+          <input id="city"
+            placeholder="Ejemplo: Quilmes, Buenos Aires">
+        </div>
+
+       
+<div id="branchFields" class="hidden">
+  <label for="branchSelect">
+    Elegí tu sucursal de Correo Argentino
+  </label>
+
+  <select id="branchSelect">
+    <option value="">Ingresá primero tu código postal</option>
+  </select>
+
+  <small id="branchStatus">
+    Te mostraremos las sucursales disponibles
+    para retirar tu pedido.
+  </small>
+</div>
+
+
+        <div class="checkout-total">
+          <span>Subtotal de productos</span>
+          <strong id="checkoutTotal">$0</strong>
+        </div>
+
+        <p class="checkout-note">
+          El costo de envío todavía no está incluido.
+        </p>
+
+        <button type="submit" class="pay-button">
+          Pagar con Mercado Pago →
+        </button>
+        <p class="checkout-note">
+          Pago de demostración: todavía no se
+          procesan transacciones reales.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
