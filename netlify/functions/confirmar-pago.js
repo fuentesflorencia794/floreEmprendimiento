@@ -21,6 +21,8 @@ exports.handler = async (event) => {
   );
 
   const firma = headers["x-signature"] || "";
+  console.log("¿Llegó la firma?", Boolean(firma));
+console.log("¿Llegó el request ID?", Boolean(headers["x-request-id"]));
   const requestId = headers["x-request-id"] || "";
   const parametros = event.queryStringParameters || {};
   const paymentId = String(
